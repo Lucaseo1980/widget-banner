@@ -30,12 +30,17 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         injectCSS();
-        var paragraphs = document.querySelectorAll('p.N2g-j');
-        if (paragraphs.length > 0) {
-            insertBanner(paragraphs[0]);
-            if (paragraphs.length > 2) insertBanner(paragraphs[1]);
-            if (paragraphs.length > 4) insertBanner(paragraphs[Math.floor(paragraphs.length/2)]);
-            insertBanner(paragraphs[paragraphs.length - 1]);
-        }
+
+        setTimeout(function() {
+            var paragraphs = document.querySelectorAll('p.N2g-j');
+            if (paragraphs.length > 0) {
+                insertBanner(paragraphs[0]);
+                if (paragraphs.length > 2) insertBanner(paragraphs[1]);
+                if (paragraphs.length > 4) insertBanner(paragraphs[Math.floor(paragraphs.length/2)]);
+                insertBanner(paragraphs[paragraphs.length - 1]);
+            } else {
+                console.log('No blog paragraphs found.');
+            }
+        }, 1200); // wait 1200 milliseconds
     });
 })();
