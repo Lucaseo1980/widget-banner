@@ -31,16 +31,17 @@
     document.addEventListener('DOMContentLoaded', function() {
         injectCSS();
 
-        setTimeout(function() {
+        const observer = new MutationObserver(function(mutations, obs) {
             var paragraphs = document.querySelectorAll('p.N2g-j');
             if (paragraphs.length > 0) {
                 insertBanner(paragraphs[0]);
                 if (paragraphs.length > 2) insertBanner(paragraphs[1]);
                 if (paragraphs.length > 4) insertBanner(paragraphs[Math.floor(paragraphs.length/2)]);
                 insertBanner(paragraphs[paragraphs.length - 1]);
-            } else {
-                console.log('No blog paragraphs found.');
+                obs.disconnect(); // Stop observing once banners are inserted
             }
-        }, 1200); // wait 1200 milliseconds
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
     });
 })();
